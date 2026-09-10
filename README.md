@@ -13,6 +13,8 @@ format is plain Markdown with YAML frontmatter, so most agent harnesses can read
 | [`afk`](skills/afk) | An unattended agent that "improves" a ticket forever, or quietly pushes something nobody reviewed |
 | [`afk-report`](skills/afk-report) | Coming back to an overnight run and having no idea which tickets actually converged |
 | [`audit-pr-threads`](skills/audit-pr-threads) | Believing "fixed that" without checking the diff, then re-requesting review with threads still open |
+| [`deep-review`](skills/deep-review) | Trusting a clean review pass, when a clean pass reported "no issues" on four changes a human found 33 in |
+| [`review-triage`](skills/review-triage) | Reading every line to find out which lines mattered, and missing rules implemented twice with nothing enforcing agreement |
 
 ## Design notes
 
@@ -30,6 +32,11 @@ headroom.
 **A claim is not evidence.** `audit-pr-threads` exists because a verdict that reads the
 reply thread will believe anyone who says "fixed". Three lenses have to fail to refute the
 claim before it counts, and a vote citing no `file:line` is discarded before the tally.
+
+**Say how far you actually got.** `deep-review` scores every safety claim on a five-rung
+ladder, from "you said so" up to "you reproduced it in the running application", and requires
+anything below rung 4 to be labelled unverified. A writeup reads as convincing whether or not
+it is true.
 
 ## Layout
 
