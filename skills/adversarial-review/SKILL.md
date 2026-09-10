@@ -19,7 +19,7 @@ intentional shipped three figures that did not add up.
 
 It is not always wrong. On the tenth it was the stronger reviewer, read every production
 line, and correctly *dismissed* a tempting duplication finding after checking five candidate
-reuses — work that yields no finding and was still right.
+reuses - work that yields no finding and was still right.
 
 So the record cuts both ways, and it licenses exactly two things:
 
@@ -27,7 +27,7 @@ So the record cuts both ways, and it licenses exactly two things:
 - **Check which gates abstained.** On a large diff, size-limited checks decline on size
   alone, and an abstention renders identically to a pass.
 
-This pass has **its own intake** — the sweep below — and it runs whether or not the earlier
+This pass has **its own intake** - the sweep below - and it runs whether or not the earlier
 pass found anything. Skipping intake because coverage looked supplied is how this pass once
 missed both of the code bugs the other one found.
 
@@ -40,7 +40,7 @@ For each fact the change's safety depends on, get as far down this list as is ch
 | --- | --- |
 | 1 | You said so. Worthless on its own. |
 | 2 | You pointed at a real `file:line`. |
-| 3 | You showed the bad case cannot happen — walked the failure, it does not reach. |
+| 3 | You showed the bad case cannot happen - walked the failure, it does not reach. |
 | 4 | You ran it. A script or test calling the real code that fails loud if you are wrong. |
 | 5 | You reproduced it in the running application. |
 
@@ -49,14 +49,14 @@ settled.
 
 **Do not trust your own writeup.** It reads as convincing whether or not it is true. That is
 the mechanism behind those three false "verified" bullets: each was a reading of the code
-rather than of a result. It is also why an exit code is not the artefact — background jobs
+rather than of a result. It is also why an exit code is not the artefact - background jobs
 have reported exit 0 while their own output files held failures, so a claim spanning two
 layers cites evidence from **both** sides or is written as unverified.
 
 The general form: *failing open is indistinguishable from the check being absent.* **Verify
 a guard fires by planting a violation. Do not assume.** One evening produced five
 reproduction steps that could not be executed, and two lint guards reporting green while
-guarding nothing — one matched a bare identifier the import line already satisfied, the
+guarding nothing - one matched a bare identifier the import line already satisfied, the
 other carried a filter excluding its only target file. Both were caught by planting a
 violation and by nothing else.
 
@@ -72,8 +72,8 @@ git diff $BASE HEAD
 ```
 
 **Then run the suite, before forming any opinion.** It is the cheapest evidence available by
-orders of magnitude — one suite of 4,169 tests finished in 13 seconds, against roughly
-274,000 tokens for a single reading pass — and it buys three things nothing else does.
+orders of magnitude - one suite of 4,169 tests finished in 13 seconds, against roughly
+274,000 tokens for a single reading pass - and it buys three things nothing else does.
 
 It anchors every later claim about "green" to a number: that run was **7 failed, 4,162
 passed**, all seven pre-existing and in files the diff never touched, so "the suite passes"
@@ -99,7 +99,7 @@ echo "$D" | grep -E "^\+.*(\[: *[\w.]*MAX|\[: *[0-9]+\])"     # caps and slices
 
 **Check each grep's count against a number you already know before you trust it.** The caps
 pattern above first shipped requiring an uppercase character straight after the colon, so it
-matched `[:MAX_ROWS]` while missing every `[:_constants.MAX_ROWS]` — one hit where the answer
+matched `[:MAX_ROWS]` while missing every `[:_constants.MAX_ROWS]` - one hit where the answer
 was four. It was caught only because the count was compared against three caps already known
 to be in that file. Otherwise it would have reported a clean sweep of a list it had barely
 read. That is this skill's thesis turned on its own tooling.
@@ -108,7 +108,7 @@ Then, of each construct:
 
 - **Every new sort key: what fraction of rows tie, and is the surviving set then
   order-dependent?** A key whose every component is *derived* collapses on the common case,
-  and a stable sort falls back to insertion order — whatever the upstream happened to return.
+  and a stable sort falls back to insertion order - whatever the upstream happened to return.
   Compare each key against the diff's others; the one not ending in an id or a label is the
   outlier. In one diff that was 1 of 13 sort constructs, and it decided which 29 of N rows
   the answer named, by backend page order.
@@ -121,7 +121,7 @@ Then, of each construct:
 - **Every new tuple, format string or comparison built from row data: which member can be
   null?** Sort keys and format strings are where a nullable column becomes a runtime error.
 
-**State the counts you enumerated** — "13 sort constructs, 6 try blocks, 3 caps" — and do it
+**State the counts you enumerated** - "13 sort constructs, 6 try blocks, 3 caps" - and do it
 even when nothing is wrong. A sweep reporting no findings without a count is
 indistinguishable from a sweep that never ran.
 
@@ -136,7 +136,7 @@ version control never warns and both land. A clean merge is not evidence of succ
 **Prose is a spec, and either half can be the wrong one.** A docstring, comment, description,
 fixture, test name or guard key each assert something about the code beside them. Load-bearing
 prose is a pointer, a contract, or an argued design, so a false half is a bug rather than a
-docs nit — the next editor acts on it. After a rename, sweep the **old** token through test
+docs nit - the next editor acts on it. After a rename, sweep the **old** token through test
 names and fixture comments, not just source. After a move, read the lines either side of the
 old site. A story told in four places has already drifted.
 
@@ -146,7 +146,7 @@ from the day it was written, so it never drifted and nothing flags it. Two logge
 same shape, both found by a human rather than a review: a price documented as per-base-unit
 when it priced a pack, so an agent stored a cost **24× understated**; and a figure documented
 as "all in cents" while carried in currency units, so a costing tool reported **1% of the
-real cost**. The tell is a constant — a quantize value is a *scale*, and prose calling it a
+real cost**. The tell is a constant - a quantize value is a *scale*, and prose calling it a
 unit is the bug. A docstring parity check that walks key *names* will not catch this: one
 confirmed all 55 payload keys were documented and still missed that the unit was false.
 
@@ -173,7 +173,7 @@ like any other. Say which of the two a finding is, every time.
 Two states. **Verdict in the first line, then the detail.**
 
 - **Request changes.** A real bug at any size, or any new duplication. One hand-rolled
-  duplicate is this state on its own — it is not a weighing test.
+  duplicate is this state on its own - it is not a weighing test.
 - **Approve.**
 
 There is no "approve with changes". It is gone as a label and kept as a requirement:

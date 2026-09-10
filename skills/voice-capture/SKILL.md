@@ -23,7 +23,7 @@ DRAFT   the exact text, ready to paste
 ```
 
 **The draft must already be in their voice, not yours.** A draft they have to rewrite is not
-a draft. If they want it different, iterate on the text — and still do not post it.
+a draft. If they want it different, iterate on the text - and still do not post it.
 
 ## Build it from a corpus, and say where you are guessing
 
@@ -56,11 +56,11 @@ actually separate this person's writing from the model's default.
 Look for:
 
 - **Punctuation the model reaches for and they never use.** An em dash is the usual one, but
-  check rather than assume — search the corpus and count.
+  check rather than assume - search the corpus and count.
 - **Sentence length**, measured rather than felt.
 - **How they handle a correction.** Inline and cheerful, or a rewritten message.
 - **Whether they soften an ask**, and with what construction.
-- **Contractions, exclamation marks, emoji** — presence and placement, not just presence.
+- **Contractions, exclamation marks, emoji** - presence and placement, not just presence.
 
 **One exception, and it matters: a verbatim quote keeps its original punctuation.** If
 someone else wrote the em dash and you are quoting them, leave it. Editing a quote to pass a

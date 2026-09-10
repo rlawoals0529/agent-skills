@@ -18,7 +18,7 @@ available, run it for step 2 of FEEDBACK instead of building the ledger by hand.
 A lens applied to a guess produces a confident wrong answer, which is worse than no answer:
 it costs a round trip and burns trust in every other line of the report.
 
-Every claim carries the evidence that settles it — a path and line from a search, a log line
+Every claim carries the evidence that settles it - a path and line from a search, a log line
 quoted, a test read rather than its name trusted, a bug reproduced or its path traced end to
 end. **When it cannot be verified, say "I have not verified this."** That is a valid output.
 
@@ -26,9 +26,9 @@ end. **When it cannot be verified, say "I have not verified this."** That is a v
 
 Everything hangs off three, not twenty rules.
 
-1. **Safe from bugs** — correct now, and defensive about what comes later.
-2. **Easy to understand** — the next reader gets it in one pass.
-3. **Ready for change** — when the next requirement lands, how many places change? One.
+1. **Safe from bugs** - correct now, and defensive about what comes later.
+2. **Easy to understand** - the next reader gets it in one pass.
+3. **Ready for change** - when the next requirement lands, how many places change? One.
 
 That last question is the prime directive. A clever solution that adds a second copy of a
 drift-prone helper is worse than a boring one that reuses the first.
@@ -101,8 +101,8 @@ anyone else sees it. Cheaper than a review cycle.
 ### First: triage, then READ. Do not skip to the lenses.
 
 This step exists because skipping it produced a 0-for-4 on a real change, missing two
-blockers. The failure was running aggregate analysis over the diff — comment ratios, greps,
-file counts — and never opening the files where the bugs were. **Metrics are a supplement.
+blockers. The failure was running aggregate analysis over the diff - comment ratios, greps,
+file counts - and never opening the files where the bugs were. **Metrics are a supplement.
 They are not the pass.**
 
 **1. Rank the changed files by risk and read the top ones in full**, in this order:
@@ -185,7 +185,7 @@ comments carry intent that inline comments do not. Two comments on two files are
 one issue, and grouping is most of the work.
 
 Enumerate through an API that exposes whether a thread is **resolved**. A plain comments
-listing counts long-settled threads and cannot tell you. **Outdated is not resolved** — it
+listing counts long-settled threads and cannot tell you. **Outdated is not resolved** - it
 means the code moved, and the concern still needs an answer.
 
 **Count the threads before planning the work.** A reviewer's summary list is typically about
@@ -241,5 +241,5 @@ identical thing, and inline spans are commoner.
 did not change. Threads get replies; let the reviewer resolve.
 
 **7. Watch CI until green**, not until the push lands. A cancelled job frequently reports as
-a failure — re-run it rather than reading it either way, and read the failing step's log
+a failure - re-run it rather than reading it either way, and read the failing step's log
 rather than guessing from the job name. The job name is regularly the wrong place to look.

@@ -28,7 +28,7 @@ off, you have found the failure mode, not an exception.
 ## `unknown` is not `no`
 
 Every readiness field is three-valued. A merge-readiness of `unknown` means no check has
-measured this tree, or the log could not be read, or — the case that bites — a gate passed
+measured this tree, or the log could not be read, or - the case that bites - a gate passed
 *before the last commit* and has since been withdrawn.
 
 **Report unknown as unknown.** A stale green is worse than no answer, because it is the one
@@ -49,7 +49,7 @@ should carry enough to decide without a second lookup:
 | `errors` | what is wrong with the card itself, not with the work |
 
 Confirm you actually hold the orchestrator role before dispatching anything, and never
-treat two fields that are both written by the claim as corroboration — they always agree.
+treat two fields that are both written by the claim as corroboration - they always agree.
 
 ## Dispatch
 
@@ -59,7 +59,7 @@ Read the assignee, never write it. The write moves to the moment a branch goes u
 rides the same permission the push already needs.
 
 Read it anyway, because the read is what stops a bad dispatch. Assigned to **someone else**
-means stop — that is not yours to reassign, and it is a strong sign the item should not be
+means stop - that is not yours to reassign, and it is a strong sign the item should not be
 dispatched at all. Unassigned, or already the human's, means dispatch and leave the field
 alone.
 
@@ -89,7 +89,7 @@ irreversible.** Run both tests, and ask only when both say yes:
 
 Killing an orphaned duplicate agent passes the first and fails the second: it is
 irreversible, and every alternative leaves work that cannot finish. Do it. Deciding whether
-two conflicting tickets become one change passes both — that is scope, and scope belongs to
+two conflicting tickets become one change passes both - that is scope, and scope belongs to
 the human.
 
 This softens nothing. A permission block still goes to the human. A commit, push, merge or
@@ -108,11 +108,11 @@ and if the answer is now determined, act rather than forwarding a stale question
 
 Say which of these you are giving:
 
-- **Quota** — often unpublished or stale. When it is, **say it is unknown**. Do not
+- **Quota** - often unpublished or stale. When it is, **say it is unknown**. Do not
   substitute a guess, and do not read a null as "plenty".
-- **An unattended run** — measurable per round once a run exists. Before that there is no
+- **An unattended run** - measurable per round once a run exists. Before that there is no
   figure.
-- **A peer's turn** — not measurable in advance. Say so. One earlier estimate counted
+- **A peer's turn** - not measurable in advance. Say so. One earlier estimate counted
   output only and came in roughly 8× low, which made the brake useless. **A number nobody
   computed is worse than a blank.**
 
@@ -145,7 +145,7 @@ already reparented to init, so it survives; a follow-up pattern-kill on the loop
 then matches only the shell and reports success while the agent keeps writing.
 
 Match the agent by its prompt, which is unique per item and lives in the process table for
-exactly as long as it does. **The trailing space is load-bearing** — without it `TASK-9`
+exactly as long as it does. **The trailing space is load-bearing** - without it `TASK-9`
 matches `TASK-93`:
 
 ```bash
@@ -157,7 +157,7 @@ pgrep -f 'working ticket' | while read p; do
 done
 ```
 
-**A parent of 1 is an orphan** — a run whose loop is gone. It finishes its current round
+**A parent of 1 is an orphan** - a run whose loop is gone. It finishes its current round
 and then nothing else happens, which is why it reads as alive and is not.
 
 Two agents against one working tree is the failure this prevents. It has happened, and it

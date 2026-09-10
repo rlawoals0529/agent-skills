@@ -19,7 +19,7 @@ truth. Do not skip a step because it "probably" holds.
 **Read the ticket's comments, not just its fields.** The description is the filing; the
 thread is where scope actually got decided, and it frequently contradicts the title. One
 ticket read "on all transfers" while its comment said every table with varying column
-widths — those two send you to different components. It is a cheap call and it is the
+widths - those two send you to different components. It is a cheap call and it is the
 difference between building the ticket and building what was agreed.
 
 **Check for an existing branch or open change, and read its conversation** before touching
@@ -41,7 +41,7 @@ landed in a sentence.
 **A clean merge is not a correct merge.** Zero conflicts proves the tool could reconcile
 the text, not the meaning. Check whether anything upstream deleted a field or helper this
 branch still calls. Never resolve wholesale with `--theirs`, `--ours`, or
-`git checkout <branch> -- <file>` — each silently reverts someone else's newer work in that
+`git checkout <branch> -- <file>` - each silently reverts someone else's newer work in that
 file. Take the newer version and re-apply this branch's narrow change on top.
 
 **Map what exists.** Search for the helper, the pattern, the sibling implementation. Reuse
@@ -97,7 +97,7 @@ Roll call
   agents asks first. Everything else fires without a question.
 - **Name the rejections.** "Skipping the query profiler, no SQL touched" is information; an
   unmentioned tool reads as unconsidered.
-- Some tools are proactive by standing habit rather than by request — a security pass on
+- Some tools are proactive by standing habit rather than by request - a security pass on
   auth surfaces, a profiler on query changes.
 
 ## Beat 3: Build in verified increments
@@ -131,8 +131,8 @@ While building, hold five things:
 - **Never edit a file a running process is executing.** A monitor or background task
   reading its own script mid-run does something undefined. Stop it, edit, restart.
 
-If the task drifts far from Beat 1's map — the real fix is somewhere else, the ticket was
-wrong, the design does not hold — stop and re-run Beats 1 and 2 rather than pushing on.
+If the task drifts far from Beat 1's map - the real fix is somewhere else, the ticket was
+wrong, the design does not hold - stop and re-run Beats 1 and 2 rather than pushing on.
 
 **Re-anchor after any context compaction, and say so out loud.** Restate the objective and
 the out-of-scope list in the first message after context is summarised. A silent re-review
@@ -150,7 +150,7 @@ When it looks done, before anything is committed.
 3. **Fix every finding.** No "deliberate deferrals" list. Pre-existing and house-style are
    not reasons to skip.
 4. **Close the gates, and add one per finding still open.** Every unfixed finding becomes
-   its own gate line. That is step 3 made countable — "fix every finding" is an unanswerable
+   its own gate line. That is step 3 made countable - "fix every finding" is an unanswerable
    claim while nothing holds the count. State the tally out loud, met over total.
 5. **Ask what the task taught.** The beat most often dropped.
    - A recurring class of issue → add it to whatever catalog the next reviewer walks.

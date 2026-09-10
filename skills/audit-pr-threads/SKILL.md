@@ -8,7 +8,7 @@ description: Audits every unresolved review thread on a PR or a stack, giving ea
 <!-- skill-lint disable trigger-collision -->
 
 Shares two triggers with `code-quality` deliberately: they fire on the same moment, and
-this one is the *tool* where that one is the *method*. Either entry point is fine — this
+this one is the *tool* where that one is the *method*. Either entry point is fine - this
 produces the ledger, `code-quality` FEEDBACK decides whether an ask was really answered.
 
 Runs the `thread-audit` workflow in this repo's `workflows/` directory.
@@ -50,7 +50,7 @@ Then the arithmetic, from the script's own caps:
 
 A 4-thread PR is about `1 + 1 + 4 + 12 = 18` agents. A full run at the cap is roughly 48.
 Quote the number for *this* input, and offer three choices: run it as counted, cap the
-panels (saying the cost — unpanelled verdicts come back at low confidence, so an
+panels (saying the cost - unpanelled verdicts come back at low confidence, so an
 "addressed" claim goes unrefuted rather than confirmed), or read a handful of threads
 inline for free.
 
@@ -59,7 +59,7 @@ Zero unresolved threads means **do not run it at all**. Say so and stop.
 ## Reading the result
 
 Work the ledger top-down; it is sorted not-done first. The number that says whether the
-panel earned its cost is `votes.overturnedAddressed` — verdicts that claimed done and did
+panel earned its cost is `votes.overturnedAddressed` - verdicts that claimed done and did
 not survive refutation.
 
 Two fields to take seriously:

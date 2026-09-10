@@ -12,13 +12,13 @@ resolve, or write to the tracker.** An all-green report is information, not perm
 
 For each ticket directory:
 
-- `state.json` — `converged` / `stalled` / `maxrounds`, and the round count.
-- `round-N.json` — the last round's open findings, and the commit sha.
-- `BLOCKERS.md` — blockers. Each `## ` heading is one.
-- `DECISIONS.md` — calls the loop made on its own. Skim for anything you disagree with; a
+- `state.json` - `converged` / `stalled` / `maxrounds`, and the round count.
+- `round-N.json` - the last round's open findings, and the commit sha.
+- `BLOCKERS.md` - blockers. Each `## ` heading is one.
+- `DECISIONS.md` - calls the loop made on its own. Skim for anything you disagree with; a
   decision the loop got wrong is worth more than a blocker it correctly escalated.
 
-Confirm the commit actually exists — `git -C <worktree> log --oneline -1`. A sha in a JSON
+Confirm the commit actually exists - `git -C <worktree> log --oneline -1`. A sha in a JSON
 file the loop wrote is a claim, not evidence.
 
 ## Report
@@ -36,7 +36,7 @@ Convert each blocker into one question option:
 - **Batched**, and only questions whose prerequisites are already settled. Hold dependents
   for the next round.
 
-A blocker that is not one of these four is a bug in the run, not a question — say so
+A blocker that is not one of these four is a bug in the run, not a question - say so
 instead of forwarding it:
 
 1. product intent, 2. irreversible, 3. an outward-facing write, 4. a rung that could not

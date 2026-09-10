@@ -10,7 +10,7 @@ quality ladder until a full pass finds nothing, commits on a real branch, and st
 
 **It cannot push, open a PR, merge, comment, or write to your tracker or chat.** That is
 enforced by deny rules in the runner's settings file, which beat every allow rule and apply
-in every mode, plus a hook that parses the actual command — because a deny glob does not
+in every mode, plus a hook that parses the actual command - because a deny glob does not
 catch `git -C /path push`. Not by asking the model nicely.
 
 ## Running it
@@ -51,7 +51,7 @@ Two implementation details that bit:
 
 The default assumes you are watching and will stop a run yourself, so an unknown or high
 reading prints and carries on. `--quota-stop` restores the refusal, and that is the flag for
-a genuinely unattended overnight run — the case the brake was built for is the one where
+a genuinely unattended overnight run - the case the brake was built for is the one where
 nobody is there to stop it.
 
 ## Choosing what to queue
@@ -63,7 +63,7 @@ worktree, a defect label giving a clear done-condition.
 
 **Bad, and say why rather than silently dropping**: oversized estimates, tickets with no
 spec, and anything whose done-condition is a product judgement. "Export the whole tree or
-just what is on screen" is the standing example — that is an answer the owner gives, not
+just what is on screen" is the standing example - that is an answer the owner gives, not
 the loop.
 
 Put the shortlist in one question before starting. Which tickets get worked overnight is
@@ -83,7 +83,7 @@ Cheapest rung first, so a cheap failure never pays for an expensive one.
 | 6 | Tech-debt pass on the diff | nothing at the top two severities |
 
 Any rung with findings restarts from rung 1. Converged means one clean pass through all
-six. **Read the summary line, never the exit code**, for anything behind a wrapper — a
+six. **Read the summary line, never the exit code**, for anything behind a wrapper - a
 wrapper has reported 0 while the underlying build returned an error with three failures.
 
 ## The brakes
@@ -105,5 +105,5 @@ denies the asking tool outright. Do not work around it.
 ## What comes back
 
 `<state-dir>/<TICKET>/` holds `state.json`, `round-N.json`, `BLOCKERS.md` and
-`DECISIONS.md`. Read it with `/unattended-triage`, which never pushes, posts, or resolves — an
+`DECISIONS.md`. Read it with `/unattended-triage`, which never pushes, posts, or resolves - an
 all-green report is information, not permission.

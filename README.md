@@ -26,7 +26,7 @@ format is plain Markdown with YAML frontmatter, so most agent harnesses can read
 Three ideas run through all of them.
 
 **Enforce with tooling, not with instructions.** `unattended-run` cannot push, and that is deny rules
-plus a hook that parses the real command — not a sentence in a prompt asking it not to. A
+plus a hook that parses the real command - not a sentence in a prompt asking it not to. A
 deny glob does not catch `git -C /path push`, so the hook parses instead of matching.
 
 **An unbounded quality loop is a runaway cost.** `unattended-run` carries three independent brakes: a
