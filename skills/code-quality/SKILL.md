@@ -5,6 +5,12 @@ description: Verify before claiming, and check code the way a good reviewer does
 
 # Code quality
 
+<!-- skill-lint disable trigger-collision -->
+
+Shares two triggers with `audit-pr-threads` deliberately. That one enumerates and verifies
+the threads; this one decides what an ask really means and what closes it. If it is
+available, run it for step 2 of FEEDBACK instead of building the ledger by hand.
+
 ## Rule zero: never guess
 
 **Never guess about code being fixed or touched. Verify, then cite.**

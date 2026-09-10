@@ -5,6 +5,12 @@ description: Audits every unresolved review thread on a PR or a stack, giving ea
 
 # Audit PR threads
 
+<!-- skill-lint disable trigger-collision -->
+
+Shares two triggers with `code-quality` deliberately: they fire on the same moment, and
+this one is the *tool* where that one is the *method*. Either entry point is fine — this
+produces the ledger, `code-quality` FEEDBACK decides whether an ask was really answered.
+
 Runs the `thread-audit` workflow in this repo's `workflows/` directory.
 
 ## What it does
