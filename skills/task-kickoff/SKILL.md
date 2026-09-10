@@ -1,6 +1,6 @@
 ---
-name: deep-start
-description: Open a task properly instead of diving straight into edits. Four beats - orient on ground truth, roll call which tools apply to THIS task, build in verified increments with a checkpoint per slice, then close the loop by capturing what the task taught. Use at the top of any non-trivial piece of work, and whenever a task has drifted and needs re-orienting mid-flight. Triggers on "starting on", "let's build", "let's work on", "implement X", "pick up this ticket", "take a look at this issue", "/deep-start".
+name: task-kickoff
+description: Open a task properly instead of diving straight into edits. Four beats - orient on ground truth, roll call which tools apply to THIS task, build in verified increments with a checkpoint per slice, then close the loop by capturing what the task taught. Use at the top of any non-trivial piece of work, and whenever a task has drifted and needs re-orienting mid-flight. Triggers on "starting on", "let's build", "let's work on", "implement X", "pick up this ticket", "take a look at this issue", "/task-kickoff".
 ---
 
 # Deep start

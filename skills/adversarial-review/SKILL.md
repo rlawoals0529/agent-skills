@@ -1,6 +1,6 @@
 ---
-name: deep-review
-description: A second, differently-configured review pass over a diff - a baseline test run before you read a line, a mechanical sweep enumerating the diff's new constructs, and an evidence ladder that makes every safety claim say how far it actually got. Use after a normal review, when reviewing your own change before pushing, or whenever a clean review needs an opinion that does not inherit its candidate set. Triggers on "review this PR", "review the diff", "is this safe to merge", "/deep-review".
+name: adversarial-review
+description: A second, differently-configured review pass over a diff - a baseline test run before you read a line, a mechanical sweep enumerating the diff's new constructs, and an evidence ladder that makes every safety claim say how far it actually got. Use after a normal review, when reviewing your own change before pushing, or whenever a clean review needs an opinion that does not inherit its candidate set. Triggers on "review this PR", "review the diff", "is this safe to merge", "/adversarial-review".
 ---
 
 # Deep review

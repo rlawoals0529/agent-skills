@@ -1,6 +1,6 @@
 ---
-name: afk-report
-description: Triage what an unattended AFK run left behind - which tickets converged, which stalled, and the blockers only the owner can clear - turning each into a batched question. Use the morning after an AFK run, or any time you want to know what the loop actually got done. Triggers on "what did afk do", "afk report", "read the overnight run", "/afk-report".
+name: unattended-triage
+description: Triage what an unattended run left behind - which tickets converged, which stalled, and the blockers only the owner can clear - turning each into a batched question. Use the morning after an unattended run, or any time you want to know what the loop actually got done. Triggers on "what did the run do", "unattended report", "read the overnight run", "/unattended-triage".
 ---
 
 # AFK report

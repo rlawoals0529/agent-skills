@@ -1,6 +1,6 @@
 ---
-name: overseer
-description: Orchestrate a fleet of coding agents - read the board, decide what can move, and dispatch work behind one batched approval. Use when several agent sessions are running and nobody is deciding what happens next, when dispatch requests are waiting, or when work has stalled and you need to know which item is actually blocked and on what. Triggers on "drain the outbox", "what should be dispatched", "run the board", "who is working on what", "/overseer".
+name: agent-orchestration
+description: Orchestrate a fleet of coding agents - read the board, decide what can move, and dispatch work behind one batched approval. Use when several agent sessions are running and nobody is deciding what happens next, when dispatch requests are waiting, or when work has stalled and you need to know which item is actually blocked and on what. Triggers on "drain the outbox", "what should be dispatched", "run the board", "who is working on what", "/agent-orchestration".
 ---
 
 # Overseer

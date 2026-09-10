@@ -1,6 +1,6 @@
 ---
-name: afk
-description: Work backlog tickets unattended until each one converges - no duplication, no bugs, no tech debt - committing on a real branch and never pushing. Use when stepping away from the machine and wanting the backlog worked rather than parked, or when a ticket needs iterating to "as good as it gets" rather than merely finished. Triggers on "going afk", "work the backlog", "run afk on ABC-82", "iterate this ticket until it is clean", "/afk".
+name: unattended-run
+description: Work backlog tickets unattended until each one converges - no duplication, no bugs, no tech debt - committing on a real branch and never pushing. Use when stepping away from the machine and wanting the backlog worked rather than parked, or when a ticket needs iterating to "as good as it gets" rather than merely finished. Triggers on "going afk", "work the backlog", "run the backlog on ABC-82", "iterate this ticket until it is clean", "/unattended-run".
 ---
 
 # AFK
@@ -16,12 +16,12 @@ catch `git -C /path push`. Not by asking the model nicely.
 ## Running it
 
 ```
-afk-run.sh ABC-82                             # one ticket
-afk-run.sh ABC-82 ABC-78                      # several, in order
-afk-run.sh ABC-82=you/abc-82-real-branch      # pin the branch
-afk-run.sh --rounds 2 --dry-run ABC-82        # plan only, writes nothing
-afk-run.sh --parallel 3 --defer-gate A B C    # three at once, gate queued
-afk-run.sh --quota-stop ABC-82                # refuse on an unknown quota
+unattended-run.sh ABC-82                             # one ticket
+unattended-run.sh ABC-82 ABC-78                      # several, in order
+unattended-run.sh ABC-82=you/abc-82-real-branch      # pin the branch
+unattended-run.sh --rounds 2 --dry-run ABC-82        # plan only, writes nothing
+unattended-run.sh --parallel 3 --defer-gate A B C    # three at once, gate queued
+unattended-run.sh --quota-stop ABC-82                # refuse on an unknown quota
 ```
 
 ## Several at once, and the one rung that contends
@@ -105,5 +105,5 @@ denies the asking tool outright. Do not work around it.
 ## What comes back
 
 `<state-dir>/<TICKET>/` holds `state.json`, `round-N.json`, `BLOCKERS.md` and
-`DECISIONS.md`. Read it with `/afk-report`, which never pushes, posts, or resolves — an
+`DECISIONS.md`. Read it with `/unattended-triage`, which never pushes, posts, or resolves — an
 all-green report is information, not permission.
