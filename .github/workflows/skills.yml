@@ -1,0 +1,132 @@
+name: Skills
+on:
+  push: { branches: [main] }
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # Everything this repository can check about itself, with no other repository involved.
+  # Kept separate from the linter below for one reason: this job can never be blocked, so a
+  # red run here always means the skills are wrong, and a red run there might mean something
+  # else entirely. Two causes in one job is a job whose colour you have to investigate.
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every skill has a SKILL.md with a name and a description
+        run: |
+          fail=0
+          count=0
+          for dir in skills/*/; do
+            name=$(basename "$dir")
+            file="$dir/SKILL.md"
+            count=$((count + 1))
+
+            if [ ! -f "$file" ]; then
+              echo "::error::$name has no SKILL.md, so nothing can load it"
+              fail=1
+              continue
+            fi
+
+            # The frontmatter is what makes a skill routable. A skill with no description is
+            # invisible to the thing that has to decide whether to invoke it, and it fails
+            # by never being chosen rather than by erroring, which is the worst way to fail.
+            if ! head -1 "$file" | grep -q '^---$'; then
+              echo "::error file=$file::does not start with frontmatter"
+              fail=1
+            fi
+            for key in name description; do
+              if ! sed -n '2,/^---$/p' "$file" | grep -q "^$key:"; then
+                echo "::error file=$file::frontmatter has no $key"
+                fail=1
+              fi
+            done
+
+            # The directory name is the address. A `name:` that disagrees with it means the
+            # skill is invoked by one string and documented under another.
+            declared=$(sed -n '2,/^---$/p' "$file" | sed -n 's/^name: *//p' | head -1)
+            if [ -n "$declared" ] && [ "$declared" != "$name" ]; then
+              echo "::error file=$file::declares name \"$declared\" but lives in skills/$name"
+              fail=1
+            fi
+          done
+
+          # A loop that found nothing must not report success. An empty skills/ is the shape
+          # this check passes silently-clean in, and a green tick over zero skills is worse
+          # than no check.
+          if [ "$count" -eq 0 ]; then
+            echo "::error::no skills found, so this check verified nothing"
+            exit 1
+          fi
+
+          echo "$count skill(s) structurally sound"
+          exit $fail
+
+      - name: No em dashes
+        run: |
+          # A house rule, and the only place it can be enforced. Prose gets pasted between
+          # these files and an em dash arrives with it; nobody notices in review because it
+          # looks like punctuation rather than like a mistake.
+          if grep -rnP '\x{2014}' --include='*.md' --include='*.js' .; then
+            echo "::error::em dash found. Use a spaced hyphen, a comma, or a full stop."
+            exit 1
+          fi
+          echo "no em dashes"
+
+  # The real linter, which lives in its own repository.
+  #
+  # `skill-lint` has no published package and its dist/ is not committed, so this checks it
+  # out and builds it. That works without any secret when it is public; when it is private
+  # the checkout needs a token with read access to it, in a SKILL_LINT_TOKEN secret.
+  #
+  # **It does not fail the run when it cannot fetch the linter, and it does not pass
+  # quietly either.** A permanently red check trains you to ignore the colour, and a
+  # silently green one reads as coverage it does not have, which is exactly how ten skills
+  # end up unlinted. So an unavailable linter is written to the job summary in as many words.
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { path: agent-skills }
+
+      - id: fetch
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/skill-lint
+          path: skill-lint
+          token: ${{ secrets.SKILL_LINT_TOKEN || github.token }}
+
+      - if: steps.fetch.outcome != 'success'
+        run: |
+          {
+            echo "### Skills were not linted"
+            echo
+            echo "\`skill-lint\` could not be checked out, so the ten skills in this"
+            echo "repository went unchecked by anything but the structural job above."
+            echo
+            echo "It needs no secret while that repository is public. While it is private,"
+            echo "add a \`SKILL_LINT_TOKEN\` secret with read access to it."
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::warning::skill-lint could not be fetched, so nothing was linted"
+
+      - if: steps.fetch.outcome == 'success'
+        uses: actions/setup-node@v4
+        with: { node-version: 22 }
+
+      - if: steps.fetch.outcome == 'success'
+        working-directory: skill-lint
+        run: |
+          npm ci
+          npm run build
+
+      - if: steps.fetch.outcome == 'success'
+        run: |
+          node skill-lint/dist/cli.js agent-skills | tee lint.txt
+          {
+            echo "### skill-lint"
+            echo
+            echo '```'
+            cat lint.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
