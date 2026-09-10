@@ -19,6 +19,7 @@ format is plain Markdown with YAML frontmatter, so most agent harnesses can read
 | [`task-kickoff`](skills/task-kickoff) | Diving into edits before knowing the real base branch, then discovering the ticket's comments contradicted its title |
 | [`code-quality`](skills/code-quality) | Running metrics over a diff instead of opening the files, and closing a review thread on an opinion rather than a proof |
 | [`bug-bash`](skills/bug-bash) | Re-running a finding through the same tool that produced it and calling that verification |
+| [`voice-capture`](skills/voice-capture) | An agent writing under your name in its own register, and posting it before you saw it |
 
 ## Design notes
 
