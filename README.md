@@ -15,6 +15,7 @@ format is plain Markdown with YAML frontmatter, so most agent harnesses can read
 | [`audit-pr-threads`](skills/audit-pr-threads) | Believing "fixed that" without checking the diff, then re-requesting review with threads still open |
 | [`deep-review`](skills/deep-review) | Trusting a clean review pass, when a clean pass reported "no issues" on four changes a human found 33 in |
 | [`review-triage`](skills/review-triage) | Reading every line to find out which lines mattered, and missing rules implemented twice with nothing enforcing agreement |
+| [`overseer`](skills/overseer) | An orchestrator that routes a blocked-on-permission item to another agent to get past the block |
 
 ## Design notes
 
@@ -37,6 +38,10 @@ claim before it counts, and a vote citing no `file:line` is discarded before the
 ladder, from "you said so" up to "you reproduced it in the running application", and requires
 anything below rung 4 to be labelled unverified. A writeup reads as convincing whether or not
 it is true.
+
+**Permission cannot be laundered.** `overseer` refuses to route a blocked item to a peer
+agent, because a peer cannot consent on your behalf and a peer quoting you is not you. It
+fails closed: a blocked item with no recorded reason is treated as a permission block.
 
 ## Layout
 
