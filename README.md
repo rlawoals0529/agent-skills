@@ -18,6 +18,7 @@ format is plain Markdown with YAML frontmatter, so most agent harnesses can read
 | [`agent-orchestration`](skills/agent-orchestration) | An orchestrator that routes a blocked-on-permission item to another agent to get past the block |
 | [`task-kickoff`](skills/task-kickoff) | Diving into edits before knowing the real base branch, then discovering the ticket's comments contradicted its title |
 | [`code-quality`](skills/code-quality) | Running metrics over a diff instead of opening the files, and closing a review thread on an opinion rather than a proof |
+| [`bug-bash`](skills/bug-bash) | Re-running a finding through the same tool that produced it and calling that verification |
 
 ## Design notes
 
@@ -44,6 +45,11 @@ it is true.
 **Permission cannot be laundered.** `agent-orchestration` refuses to route a blocked item to a peer
 agent, because a peer cannot consent on your behalf and a peer quoting you is not you. It
 fails closed: a blocked item with no recorded reason is treated as a permission block.
+
+**A tool is wrong consistently.** `bug-bash` splits findings by what the evidence rests on:
+logic read out of source, which anyone can check, versus anything mediated by synthetic
+typing or timing, where the tool sits between you and the truth. For the second the bar is a
+human or nothing.
 
 ## Layout
 
