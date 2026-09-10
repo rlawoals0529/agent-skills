@@ -3,7 +3,7 @@ name: unattended-run
 description: Work backlog tickets unattended until each one converges - no duplication, no bugs, no tech debt - committing on a real branch and never pushing. Use when stepping away from the machine and wanting the backlog worked rather than parked, or when a ticket needs iterating to "as good as it gets" rather than merely finished. Triggers on "going afk", "work the backlog", "run the backlog on ABC-82", "iterate this ticket until it is clean", "/unattended-run".
 ---
 
-# AFK
+# Unattended run
 
 Hand the backlog to an unattended loop. It works one ticket per worktree, iterates a
 quality ladder until a full pass finds nothing, commits on a real branch, and stops.

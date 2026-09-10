@@ -3,7 +3,7 @@ name: unattended-triage
 description: Triage what an unattended run left behind - which tickets converged, which stalled, and the blockers only the owner can clear - turning each into a batched question. Use the morning after an unattended run, or any time you want to know what the loop actually got done. Triggers on "what did the run do", "unattended report", "read the overnight run", "/unattended-triage".
 ---
 
-# AFK report
+# Unattended triage
 
 Read the run state directory and hand back a decision list. **Never push, post, comment,
 resolve, or write to the tracker.** An all-green report is information, not permission.
