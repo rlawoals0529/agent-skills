@@ -17,6 +17,7 @@ format is plain Markdown with YAML frontmatter, so most agent harnesses can read
 | [`review-triage`](skills/review-triage) | Reading every line to find out which lines mattered, and missing rules implemented twice with nothing enforcing agreement |
 | [`overseer`](skills/overseer) | An orchestrator that routes a blocked-on-permission item to another agent to get past the block |
 | [`deep-start`](skills/deep-start) | Diving into edits before knowing the real base branch, then discovering the ticket's comments contradicted its title |
+| [`code-quality`](skills/code-quality) | Running metrics over a diff instead of opening the files, and closing a review thread on an opinion rather than a proof |
 
 ## Design notes
 
