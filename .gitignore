@@ -1,1 +1,6 @@
 node_modules
+
+# The page is compiled beside its source; only the TypeScript is committed.
+site/**/*.js
+test-results/
+playwright-report/

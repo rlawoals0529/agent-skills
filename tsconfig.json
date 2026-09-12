@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    /* Beside the source. There is no bundler here: the page is plain HTML loading modules,
+       which is all a catalogue of ten markdown files needs. */
+    "outDir": "site",
+    "rootDir": "site",
+    "types": []
+  },
+  "include": ["site"],
+  "exclude": ["site/lib/*.test.ts"]
+}

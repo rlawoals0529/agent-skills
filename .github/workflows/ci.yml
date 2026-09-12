@@ -1,0 +1,41 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  catalogue:
+    name: The catalogue matches the skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+      # The catalogue is generated from skills/ and the README table, and the build refuses a
+      # skill with no row or a row with no skill. Checking the committed copy is current is
+      # what stops the page describing a set nobody has.
+      - name: site/catalogue.json is current
+        run: |
+          node scripts/build-catalogue.mjs
+          git diff --exit-code site/catalogue.json \
+            || { echo "site/catalogue.json is stale. Run: node scripts/build-catalogue.mjs"; exit 1; }
+
+  site:
+    name: The catalogue works in a browser
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: test-results/
+          retention-days: 7

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agent-skills - a catalogue of failures, and what prevents each one</title>
+<meta name="description" content="Ten skills for coding agents, indexed by the failure each one prevents, with the phrases that summon it.">
+<link rel="stylesheet" href="./theme/palettes.css">
+<link rel="stylesheet" href="./theme/base.css">
+<link rel="stylesheet" href="./theme/layout-flat.css">
+<link rel="stylesheet" href="./theme/type.css">
+<link rel="stylesheet" href="./theme/texture.css">
+<link rel="stylesheet" href="./style.css">
+<script>
+  /* Before first paint, so the page never shows one palette and swaps to another. Wrapped
+     because localStorage throws outright in a private window. */
+  (function () {
+    var t;
+    try { t = localStorage.getItem("agent-skills:theme"); } catch (e) {}
+    document.documentElement.setAttribute("data-theme", t || "twilight-comet");
+  })();
+</script>
+</head>
+<body class="grain">
+<div class="wrap">
+  <h1>agent<span>-skills</span></h1>
+  <p class="tagline">
+    Ten skills for coding agents, each one here because a specific failure kept happening.
+    This is the catalogue of those failures.
+  </p>
+
+  <section class="panel">
+    <label class="find">
+      <span class="find-label">Say something</span>
+      <input type="text" id="q" autocomplete="off" spellcheck="false"
+             placeholder="the PR came back" aria-describedby="find-note">
+    </label>
+    <p class="note" id="find-note">
+      Matched against the trigger phrases as written, letter for letter. That is <b>not</b>
+      how a harness routes - it reads the whole description and picks on meaning, which is a
+      different question with a different answer.
+      <a href="https://rlawoals0529.github.io/skill-radar/">skill-radar</a> measures that one.
+    </p>
+    <p class="note" id="count" aria-live="polite"></p>
+  </section>
+
+  <ol class="catalogue" id="catalogue"></ol>
+
+  <div id="palette-host"></div>
+</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

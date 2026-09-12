@@ -6,6 +6,19 @@ earned it. Each one exists because a specific failure kept happening.
 They are written for [Claude Code](https://docs.claude.com/en/docs/claude-code) but the
 format is plain Markdown with YAML frontmatter, so most agent harnesses can read them.
 
+## Browse them
+
+**[rlawoals0529.github.io/agent-skills](https://rlawoals0529.github.io/agent-skills/)** -
+the same ten, indexed by the failure each one prevents, with the phrases that summon it
+
+The page is generated from these files: the names and descriptions from each `SKILL.md`, the
+failures from the table below, and the triggers from
+[`agent-skill-lint`](https://github.com/rlawoals0529/skill-lint)'s own `triggersOf` rather
+than a regex written for the page. A second definition of "trigger" would let the catalogue
+and the linter that checks these same skills for colliding triggers mean two different things
+by one word. The build refuses a skill with no row in the table, and a row naming a skill
+that is no longer here.
+
 ## Skills
 
 | Skill | The failure it prevents |

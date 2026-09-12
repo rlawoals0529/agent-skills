@@ -1,0 +1,21 @@
+{
+  "name": "agent-skills-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-catalogue.mjs && tsc -p tsconfig.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "agent-skill-lint": "github:rlawoals0529/skill-lint"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "happy-dom": "^15.11.7",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,147 @@
+[
+  {
+    "name": "adversarial-review",
+    "dir": "adversarial-review",
+    "failure": "Trusting a clean review pass, when a clean pass reported \"no issues\" on four changes a human found 33 in",
+    "description": "A second, differently-configured review pass over a diff - a baseline test run before you read a line, a mechanical sweep enumerating the diff's new constructs, and an evidence ladder that makes every safety claim say how far it actually got. Use after a normal review, when reviewing your own change before pushing, or whenever a clean review needs an opinion that does not inherit its candidate set. Triggers on \"review this PR\", \"review the diff\", \"is this safe to merge\", \"/adversarial-review\".",
+    "triggers": [
+      "review this pr",
+      "review the diff",
+      "is this safe to merge",
+      "/adversarial-review"
+    ]
+  },
+  {
+    "name": "agent-orchestration",
+    "dir": "agent-orchestration",
+    "failure": "An orchestrator that routes a blocked-on-permission item to another agent to get past the block",
+    "description": "Orchestrate a fleet of coding agents - read the board, decide what can move, and dispatch work behind one batched approval. Use when several agent sessions are running and nobody is deciding what happens next, when dispatch requests are waiting, or when work has stalled and you need to know which item is actually blocked and on what. Triggers on \"drain the outbox\", \"what should be dispatched\", \"run the board\", \"who is working on what\", \"/agent-orchestration\".",
+    "triggers": [
+      "drain the outbox",
+      "what should be dispatched",
+      "run the board",
+      "who is working on what",
+      "/agent-orchestration"
+    ]
+  },
+  {
+    "name": "audit-pr-threads",
+    "dir": "audit-pr-threads",
+    "failure": "Believing \"fixed that\" without checking the diff, then re-requesting review with threads still open",
+    "description": "Audits every unresolved review thread on a PR or a stack, giving each a verdict with a file:line proof, then adversarially refutes every \"addressed\" claim with a three-voter panel. Use when a PR comes back, to tell genuinely-handled threads from only-claimed-handled, before re-requesting review, or when a reviewer's summary looks shorter than the real thread count. Triggers on \"the PR came back\", \"requested changes\", \"unresolved threads\", \"did we address everything\", \"ready for re-review\".",
+    "triggers": [
+      "addressed",
+      "the pr came back",
+      "requested changes",
+      "unresolved threads",
+      "did we address everything",
+      "ready for re-review"
+    ]
+  },
+  {
+    "name": "bug-bash",
+    "dir": "bug-bash",
+    "failure": "Re-running a finding through the same tool that produced it and calling that verification",
+    "description": "Adversarially break a feature that already runs, through the real UI, and produce reproducible evidence-backed findings. Derives attack charters from the invariants in the code itself, captures the network payload alongside the screenshot so \"looks right but sends wrong\" is caught, then triages every observation into BUG, EXPECTED, BACKEND-DISAGREES or QUESTION. Use for a QA session on a built feature, for dogfooding a surface before a demo, or when asked to try to break something. Triggers on \"break this\", \"bug bash\", \"try to break it\", \"find bugs in X\", \"QA this page\", \"dogfood this\", \"hunt for bugs\", \"stress the UI\", \"what can go wrong with X\".",
+    "triggers": [
+      "looks right but sends wrong",
+      "break this",
+      "bug bash",
+      "try to break it",
+      "find bugs in x",
+      "qa this page",
+      "dogfood this",
+      "hunt for bugs",
+      "stress the ui",
+      "what can go wrong with x"
+    ]
+  },
+  {
+    "name": "code-quality",
+    "dir": "code-quality",
+    "failure": "Running metrics over a diff instead of opening the files, and closing a review thread on an opinion rather than a proof",
+    "description": "Verify before claiming, and check code the way a good reviewer does. Three modes. START opens work - maps what exists, ladders the design, fixes the split first. DEEP CHECK closes it - reads the high-risk files, applies three lenses, then a twelve-question blocks gate. FEEDBACK handles a change that came back - syncs the base, counts every unresolved thread, treats each ask as a symptom, and closes a thread only with recorded proof. Use whenever a task starts or finishes, before any commit or push, when refactoring, and always when a change is blocked, has requested changes or a red check. Triggers on \"starting X\", \"let's build X\", \"how should I split this\", \"does this look done\", \"is this ready\", \"about to commit\", \"refactor this\", \"requested changes\", \"address the feedback\", \"unresolved threads\", \"CI is red\".",
+    "triggers": [
+      "starting x",
+      "let's build x",
+      "how should i split this",
+      "does this look done",
+      "is this ready",
+      "about to commit",
+      "refactor this",
+      "requested changes",
+      "address the feedback",
+      "unresolved threads",
+      "ci is red"
+    ]
+  },
+  {
+    "name": "review-triage",
+    "dir": "review-triage",
+    "failure": "Reading every line to find out which lines mattered, and missing rules implemented twice with nothing enforcing agreement",
+    "description": "Triage a pull request or working diff so a reviewer knows what to skim and what to actually read. Finds rules implemented twice with nothing enforcing agreement, feature-flag paths tested in only one state, and new logic without tests. Produces a per-file verdict of skim, scan or read, with a stated reason for anything that needs a human. Use before opening a PR, when the review queue is the bottleneck, or when asked whether a change is safe to approve quickly. Triggers on \"is this ready to review\", \"will this pass review\", \"did I test this enough\", \"triage this PR\", \"what needs a human look\", \"is this safe to approve\".",
+    "triggers": [
+      "is this ready to review",
+      "will this pass review",
+      "did i test this enough",
+      "triage this pr",
+      "what needs a human look",
+      "is this safe to approve"
+    ]
+  },
+  {
+    "name": "task-kickoff",
+    "dir": "task-kickoff",
+    "failure": "Diving into edits before knowing the real base branch, then discovering the ticket's comments contradicted its title",
+    "description": "Open a task properly instead of diving straight into edits. Four beats - orient on ground truth, roll call which tools apply to THIS task, build in verified increments with a checkpoint per slice, then close the loop by capturing what the task taught. Use at the top of any non-trivial piece of work, and whenever a task has drifted and needs re-orienting mid-flight. Triggers on \"starting on\", \"let's build\", \"let's work on\", \"implement X\", \"pick up this ticket\", \"take a look at this issue\", \"/task-kickoff\".",
+    "triggers": [
+      "starting on",
+      "let's build",
+      "let's work on",
+      "implement x",
+      "pick up this ticket",
+      "take a look at this issue",
+      "/task-kickoff"
+    ]
+  },
+  {
+    "name": "unattended-run",
+    "dir": "unattended-run",
+    "failure": "An unattended agent that \"improves\" a ticket forever, or quietly pushes something nobody reviewed",
+    "description": "Work backlog tickets unattended until each one converges - no duplication, no bugs, no tech debt - committing on a real branch and never pushing. Use when stepping away from the machine and wanting the backlog worked rather than parked, or when a ticket needs iterating to \"as good as it gets\" rather than merely finished. Triggers on \"going afk\", \"work the backlog\", \"run the backlog on ABC-82\", \"iterate this ticket until it is clean\", \"/unattended-run\".",
+    "triggers": [
+      "as good as it gets",
+      "going afk",
+      "work the backlog",
+      "run the backlog on abc-82",
+      "iterate this ticket until it is clean",
+      "/unattended-run"
+    ]
+  },
+  {
+    "name": "unattended-triage",
+    "dir": "unattended-triage",
+    "failure": "Coming back to an overnight run and having no idea which tickets actually converged",
+    "description": "Triage what an unattended run left behind - which tickets converged, which stalled, and the blockers only the owner can clear - turning each into a batched question. Use the morning after an unattended run, or any time you want to know what the loop actually got done. Triggers on \"what did the run do\", \"unattended report\", \"read the overnight run\", \"/unattended-triage\".",
+    "triggers": [
+      "what did the run do",
+      "unattended report",
+      "read the overnight run",
+      "/unattended-triage"
+    ]
+  },
+  {
+    "name": "voice-capture",
+    "dir": "voice-capture",
+    "failure": "An agent writing under your name in its own register, and posting it before you saw it",
+    "description": "Build a voice guide from someone's real writing, then draft in it without posting. Covers finding the tells that actually separate their writing from yours, evidencing every rule so the guide cannot drift into invention, keeping registers separate per surface, and the draft-and-hand-over rule. Use when an agent will write prose that goes out under a person's name, when a draft keeps coming back rewritten, or when setting up a new collaborator's voice. Triggers on \"write as me\", \"make this sound like me\", \"in my voice\", \"draft the PR description\", \"this does not sound like me\", \"capture my writing style\".",
+    "triggers": [
+      "write as me",
+      "make this sound like me",
+      "in my voice",
+      "draft the pr description",
+      "this does not sound like me",
+      "capture my writing style"
+    ]
+  }
+]

@@ -1,0 +1,118 @@
+/* agent-skills.
+
+   Design read: a catalogue of FAILURES, indexed by the skill that prevents each one. This
+   repository is organised that way - every skill is here because something kept going wrong -
+   so the failure is what leads each entry, at reading size, and the skill's name is the
+   answer under it, the way a catalogue entry names the part that fixes what you looked up.
+
+   No cards. A column of bordered boxes says none of these matters more than another; here
+   they really are a list of equals, and a list is what that looks like. */
+
+.wrap { max-width: 880px; }
+
+.tagline { font-size: var(--step-1); line-height: 1.5; margin-top: 8px; max-width: 58ch; }
+.note { color: var(--dim); font-size: 12.5px; margin-top: 12px; max-width: 68ch; line-height: 1.65; }
+.note a { color: var(--accent-text, var(--accent)); }
+h1 span { color: var(--accent-text, var(--accent)); }
+
+/* ---- Find -------------------------------------------------------------------------------
+   A visible label, not a placeholder: a placeholder is the label right up until anybody
+   types, and then the field has none. */
+
+.find { display: block; }
+.find-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--dim);
+  margin-bottom: 2px;
+}
+.find input { font-size: var(--step-2); padding: 10px 2px; }
+
+/* ---- The catalogue ---------------------------------------------------------------------- */
+
+.catalogue { list-style: none; margin: 64px 0 0; padding: 0; }
+
+.entry + .entry {
+  margin-top: 38px;
+  padding-top: 38px;
+  /* One rule between entries and none around them. The boundary is all a reader needs, and
+     a box would draw it four times. */
+  border-top: 1px solid var(--edge);
+}
+
+/* The failure leads, at reading size, because it is the thing you are looking yourself up
+   in. The skill's name is the answer to it and sits underneath. */
+.failure {
+  margin: 0;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.answer {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent-text, var(--accent));
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+.answer::before { content: "→ "; color: var(--dim); }
+.answer:hover { text-decoration: underline; }
+
+/* The phrases that summon it, quoted the way they are written in the description. */
+.triggers { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 14px 0 0; padding: 0; }
+.trigger {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--dim);
+  padding: 3px 8px;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+}
+.trigger::before { content: "\201C"; }
+.trigger::after { content: "\201D"; }
+/* The phrase that put this entry on screen. Without it a filtered list makes you hunt for
+   the reason it is there. */
+.trigger.hit {
+  color: var(--fg);
+  border-color: var(--accent-text, var(--accent));
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* ---- Palette picker ----------------------------------------------------------------------
+   Built in plain TypeScript here, so it carries its own styles. The behaviour - one tab
+   stop, arrow keys, Escape - is shared, from yozora's wirePalette. */
+
+.palette { margin-top: 4rem; }
+.palette-toggle, .palette-list button {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: none; border: 1px solid var(--edge-strong, var(--edge)); border-radius: 999px;
+  padding: .3rem .8rem; margin: 0; color: var(--dim); font: inherit; font-size: .85rem;
+  cursor: pointer; min-height: 34px; text-decoration: none;
+  transition: color 140ms ease-out, border-color 140ms ease-out;
+}
+.palette-toggle:hover, .palette-list button:hover { color: var(--fg); border-color: var(--accent-text, var(--accent)); }
+.palette-toggle:focus-visible, .palette-list button:focus-visible {
+  outline: 2px solid var(--accent-text, var(--accent)); outline-offset: 2px;
+}
+.palette-list button[aria-checked="true"] { border-color: var(--accent-text, var(--accent)); color: var(--fg); }
+.palette-chip {
+  width: .9rem; height: .9rem; border-radius: 50%;
+  background: var(--accent); border: 1px solid var(--edge); flex: none;
+}
+/* `display` on a class beats the user agent's `[hidden] { display: none }`, because author
+   styles win over the UA sheet whatever the specificity. */
+.palette-list:not([hidden]) { margin-top: .8rem; display: grid; gap: .9rem; }
+.palette-list fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.palette-list legend {
+  font-family: var(--font-mono);
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: .4rem;
+}
