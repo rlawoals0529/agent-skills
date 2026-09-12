@@ -11,7 +11,7 @@
  * definition of "trigger" would mean the linter that checks these skills for colliding
  * triggers and the page that lists them were describing different things.
  */
-import { createThemeStore, grouped, type Theme } from "./lib/theme.js";
+import { createThemeStore, DEFAULT_THEME, grouped, type Theme } from "./lib/theme.js";
 import { wirePalette } from "./lib/palette-keys.js";
 
 interface Entry {
