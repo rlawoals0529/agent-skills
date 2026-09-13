@@ -11,11 +11,11 @@ normal review, never instead of it.
 ## A clean review is not a baseline
 
 The single most expensive mistake is treating the previous pass's findings as the set of
-things worth looking at. Over nine changes on one workstream, an automated review reported
-"no issues found" on four of them while a human reviewer filed 33 findings on those same
-four. Three of its "verified explicitly" bullets were false: a cap it read as 50 was 30, a
-missing gate it argued away was the next round's first blocker, and an arithmetic it called
-intentional shipped three figures that did not add up.
+things worth looking at. An automated review will report "no issues found" on a change a
+human reviewer then fills with comments, and its most confident bullets are the ones to
+distrust first: a limit misread, a missing check argued away as intentional, an arithmetic
+waved through that does not add up. A clean pass means the questions it asked came back
+clean. It says nothing about the questions it never asked.
 
 It is not always wrong. On the tenth it was the stronger reviewer, read every production
 line, and correctly *dismissed* a tempting duplication finding after checking five candidate
