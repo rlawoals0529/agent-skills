@@ -146,7 +146,7 @@ were all findable. Nobody ran the list.
 ```
 Blocks gate
 - [ ] Unhandled empty or null, off-by-one, an untested boundary?
-- [ ] Soft-delete leak, authorization gap, cross-tenant bleed?
+- [ ] Soft-delete leak, authorization gap, data visible across customers?
 - [ ] Swallowed exception, silent fallback, dropped promise?
 - [ ] Per-row database or network call with no batching?
 - [ ] Third copy of a mapping, a predicate, or a shared helper?
