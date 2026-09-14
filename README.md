@@ -26,7 +26,7 @@ that is no longer here.
 | [`unattended-run`](skills/unattended-run) | An unattended agent that "improves" a ticket forever, or quietly pushes something nobody reviewed |
 | [`unattended-triage`](skills/unattended-triage) | Coming back to an overnight run and having no idea which tickets actually converged |
 | [`audit-pr-threads`](skills/audit-pr-threads) | Believing "fixed that" without checking the diff, then re-requesting review with threads still open |
-| [`adversarial-review`](skills/adversarial-review) | Trusting a clean review pass, when a clean pass reported "no issues" on four changes a human found 33 in |
+| [`adversarial-review`](skills/adversarial-review) | A review reports no issues because it misses failure paths that a second, independent pass would catch |
 | [`review-triage`](skills/review-triage) | Reading every line to find out which lines mattered, and missing rules implemented twice with nothing enforcing agreement |
 | [`agent-orchestration`](skills/agent-orchestration) | An orchestrator that routes a blocked-on-permission item to another agent to get past the block |
 | [`task-kickoff`](skills/task-kickoff) | Diving into edits before knowing the real base branch, then discovering the ticket's comments contradicted its title |
