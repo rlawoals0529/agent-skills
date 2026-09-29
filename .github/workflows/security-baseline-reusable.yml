@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pattern='(api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret|private[_-]?key|password)[[:space:]]*[:=][[:space:]]*["'"'][A-Za-z0-9_./+=:-]{16,}["'"']'
+          pattern='(api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret|private[_-]?key|password)[[:space:]]*[:=][[:space:]]*[^$][A-Za-z0-9_./+=:-]{20,}'
           matches="$(git grep -nEI "$pattern" -- ':!*.md' ':!*.lock' ':!package-lock.json' ':!*.example' ':!*.sample' ':!*.template' ':!test/**' ':!tests/**' ':!fixtures/**' || true)"
           if [ -n "$matches" ]; then
             echo 'Potential literal credentials found. Review and move real secrets to managed secrets:'
