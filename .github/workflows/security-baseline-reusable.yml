@@ -1,0 +1,59 @@
+name: Reusable repository security baseline
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Reject tracked secret files
+        shell: bash
+        run: |
+          set -euo pipefail
+          tracked="$(git ls-files)"
+          bad="$(printf '%s\n' "$tracked" | grep -E '(^|/)(\.env($|\.)|\.dev\.vars$|id_rsa$|id_ed25519$|[^/]+\.(pem|p12|pfx|key)$)' | grep -Ev '(^|/)(\.env\.example|\.env\.sample|\.env\.template)$' || true)"
+          if [ -n "$bad" ]; then
+            echo 'Sensitive-looking files are tracked:'
+            printf '%s\n' "$bad"
+            exit 1
+          fi
+
+      - name: Scan tracked source for obvious literal secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          pattern='(api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret|private[_-]?key|password)[[:space:]]*[:=][[:space:]]*["'"'][A-Za-z0-9_./+=:-]{16,}["'"']'
+          matches="$(git grep -nEI "$pattern" -- ':!*.md' ':!*.lock' ':!package-lock.json' ':!*.example' ':!*.sample' ':!*.template' ':!test/**' ':!tests/**' ':!fixtures/**' || true)"
+          if [ -n "$matches" ]; then
+            echo 'Potential literal credentials found. Review and move real secrets to managed secrets:'
+            printf '%s\n' "$matches"
+            exit 1
+          fi
+
+      - name: Audit production npm dependencies
+        if: ${{ hashFiles('package-lock.json') != '' }}
+        shell: bash
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Check repository secret-hygiene files
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f .gitignore ]; then
+            grep -Eq '(^|/)\.env(\*|$|\.)|\.env\*' .gitignore || echo '::warning::.gitignore does not obviously ignore .env files'
+          else
+            echo '::warning::No .gitignore exists; add one before introducing local secrets or build artifacts.'
+          fi
+
+      - name: Security summary
+        run: |
+          echo 'Security baseline passed.'
+          echo 'Reminder: dashboard controls (secret scanning, billing caps, RLS, backups, provider rate limits) must be configured at the relevant service.'
