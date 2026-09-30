@@ -26,6 +26,19 @@ jobs:
             exit 1
           fi
 
+      - name: Require environment files to be ignored
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f .gitignore ]; then
+            echo 'No .gitignore exists. Add one before introducing local secrets or build artifacts.'
+            exit 1
+          fi
+          if ! grep -Eq '(^|/)\.env(\*|$|\.)|\.env\*' .gitignore; then
+            echo '.gitignore must ignore .env files (for example: .env* with a negated .env.example rule if needed).'
+            exit 1
+          fi
+
       - name: Scan tracked source for obvious literal secrets
         shell: bash
         run: |
@@ -38,22 +51,39 @@ jobs:
             exit 1
           fi
 
+      - name: Reject wildcard CORS in application source
+        shell: bash
+        run: |
+          set -euo pipefail
+          matches="$(git grep -nEI '(Access-Control-Allow-Origin[^\n]*\*|allow_origins[[:space:]]*=[[:space:]]*\[[[:space:]]*["'"']\*["'"'])' -- '*.py' '*.php' '*.js' '*.jsx' '*.ts' '*.tsx' ':!test/**' ':!tests/**' ':!fixtures/**' ':!docs/**' || true)"
+          if [ -n "$matches" ]; then
+            echo 'Wildcard CORS found in application source. Use an explicit allowlist:'
+            printf '%s\n' "$matches"
+            exit 1
+          fi
+
+      - name: Verify npm lockfile and package availability
+        if: ${{ hashFiles('package-lock.json') != '' }}
+        shell: bash
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
       - name: Audit production npm dependencies
         if: ${{ hashFiles('package-lock.json') != '' }}
         shell: bash
         run: npm audit --omit=dev --audit-level=high
 
-      - name: Check repository secret-hygiene files
+      - name: Flag unsafe browser HTML sinks for review
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f .gitignore ]; then
-            grep -Eq '(^|/)\.env(\*|$|\.)|\.env\*' .gitignore || echo '::warning::.gitignore does not obviously ignore .env files'
-          else
-            echo '::warning::No .gitignore exists; add one before introducing local secrets or build artifacts.'
+          matches="$(git grep -nE '(dangerouslySetInnerHTML|\.innerHTML[[:space:]]*=|insertAdjacentHTML\()' -- '*.js' '*.jsx' '*.ts' '*.tsx' ':!test/**' ':!tests/**' ':!fixtures/**' ':!docs/**' || true)"
+          if [ -n "$matches" ]; then
+            echo '::warning::Direct HTML rendering sinks found. Confirm every value is trusted or sanitized before rendering.'
+            printf '%s\n' "$matches"
           fi
 
       - name: Security summary
         run: |
           echo 'Security baseline passed.'
-          echo 'Reminder: dashboard controls (secret scanning, billing caps, RLS, backups, provider rate limits) must be configured at the relevant service.'
+          echo 'Repository checks cover current tracked secrets, env hygiene, wildcard CORS, npm lock/install integrity, high-severity production npm advisories, and unsafe HTML-sink review.'
+          echo 'Dashboard/deployment controls such as historical secret scanning, credential rotation, RLS, billing caps, private buckets, HTTPS enforcement, backups and restore tests must be configured at the relevant service.'
