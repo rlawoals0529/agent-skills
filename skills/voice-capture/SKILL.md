@@ -90,6 +90,31 @@ sentences, active voice, plain words, one idea at a time. They disagree only abo
 Keep the contractions and the exclamation marks the standard would strip, because those are
 the person rather than the prose.
 
+## Edit without sanding off the person
+
+Once a draft is in the right register, edit with restraint. The goal is not to make every
+sentence smoother. It is to remove the places where the agent's default prose is showing.
+
+On the final pass:
+
+- **Keep a clear sentence that already sounds like them.** Do not replace it only because a
+  more polished version exists.
+- **Cut language that does no work.** Padded openings, repeated conclusions and transition
+  phrases that merely announce the next sentence should disappear.
+- **Make vague claims specific only when the corpus or supplied facts support the detail.**
+  Never invent an example, statistic, experience or opinion to make the prose feel grounded.
+- **Watch repeated sentence shapes.** If several lines open or land the same way, fix the
+  monotony, but do not force every sentence to have a different length.
+- **Use plain speech where the corpus does.** Contractions and fragments are evidence-driven
+  choices, not decorations to make the draft seem casual.
+- **Do not add personality that was not there.** No invented jokes, slang, excitement,
+  confidence or intimacy.
+- **Check the seams.** Openings, transitions and paragraph endings are where generic
+  model-written phrasing survives most often.
+
+A useful test is whether the edit made the writer easier to hear or merely made the prose
+look more edited. Prefer the first.
+
 ## A template beats an instruction
 
 For a repeated surface, give the shape rather than an adjective. "Be concise" is
