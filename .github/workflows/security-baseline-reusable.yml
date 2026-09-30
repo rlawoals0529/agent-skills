@@ -67,15 +67,24 @@ jobs:
             exit 1
           fi
 
-      - name: Verify npm lockfile and package availability
-        if: ${{ hashFiles('package-lock.json') != '' }}
+      - name: Verify and audit every npm lockfile
         shell: bash
-        run: npm ci --ignore-scripts --no-audit --no-fund
-
-      - name: Audit production npm dependencies
-        if: ${{ hashFiles('package-lock.json') != '' }}
-        shell: bash
-        run: npm audit --omit=dev --audit-level=high
+        run: |
+          set -euo pipefail
+          mapfile -t locks < <(git ls-files | grep -E '(^|/)package-lock\.json$' || true)
+          if [ "${#locks[@]}" -eq 0 ]; then
+            echo 'No npm lockfiles found.'
+            exit 0
+          fi
+          for lock in "${locks[@]}"; do
+            dir="$(dirname "$lock")"
+            echo "Auditing npm project in $dir"
+            (
+              cd "$dir"
+              npm ci --ignore-scripts --no-audit --no-fund
+              npm audit --omit=dev --audit-level=high
+            )
+          done
 
       - name: Flag unsafe browser HTML sinks for review
         shell: bash
@@ -90,5 +99,5 @@ jobs:
       - name: Security summary
         run: |
           echo 'Security baseline passed.'
-          echo 'Repository checks cover current tracked secrets, env hygiene, wildcard CORS, npm lock/install integrity, high-severity production npm advisories, and unsafe HTML-sink review.'
+          echo 'Repository checks cover current tracked secrets, env hygiene, wildcard CORS, every tracked npm lockfile, high-severity production npm advisories, and unsafe HTML-sink review.'
           echo 'Dashboard/deployment controls such as historical secret scanning, credential rotation, RLS, billing caps, private buckets, HTTPS enforcement, backups and restore tests must be configured at the relevant service.'
