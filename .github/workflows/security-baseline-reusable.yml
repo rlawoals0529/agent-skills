@@ -55,7 +55,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          matches="$(git grep -nEI '(Access-Control-Allow-Origin[^\n]*\*|allow_origins[[:space:]]*=[[:space:]]*\[[[:space:]]*["'"']\*["'"'])' -- '*.py' '*.php' '*.js' '*.jsx' '*.ts' '*.tsx' ':!test/**' ':!tests/**' ':!fixtures/**' ':!docs/**' || true)"
+          paths=(-- '*.py' '*.php' '*.js' '*.jsx' '*.ts' '*.tsx' ':!test/**' ':!tests/**' ':!fixtures/**' ':!docs/**')
+          header_matches="$(git grep -nEI 'Access-Control-Allow-Origin.*\*' "${paths[@]}" || true)"
+          python_matches="$(git grep -nEI "allow_origins[[:space:]]*=[[:space:]]*\\[[[:space:]]*['\\\"]\\*['\\\"]" "${paths[@]}" || true)"
+          matches="$(printf '%s\n%s\n' "$header_matches" "$python_matches" | sed '/^$/d')"
           if [ -n "$matches" ]; then
             echo 'Wildcard CORS found in application source. Use an explicit allowlist:'
             printf '%s\n' "$matches"
