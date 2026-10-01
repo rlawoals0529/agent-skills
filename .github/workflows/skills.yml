@@ -81,7 +81,7 @@ jobs:
   #
   # **It does not fail the run when it cannot fetch the linter, and it does not pass
   # quietly either.** A permanently red check trains you to ignore the colour, and a
-  # silently green one reads as coverage it does not have, which is exactly how ten skills
+  # silently green one reads as coverage it does not have, which is exactly how eleven skills
   # end up unlinted. So an unavailable linter is written to the job summary in as many words.
   lint:
     runs-on: ubuntu-latest
@@ -102,7 +102,7 @@ jobs:
           {
             echo "### Skills were not linted"
             echo
-            echo "\`skill-lint\` could not be checked out, so the ten skills in this"
+            echo "\`skill-lint\` could not be checked out, so the eleven skills in this"
             echo "repository went unchecked by anything but the structural job above."
             echo
             echo "It needs no secret while that repository is public. While it is private,"

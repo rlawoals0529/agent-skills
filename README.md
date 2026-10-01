@@ -9,7 +9,7 @@ format is plain Markdown with YAML frontmatter, so most agent harnesses can read
 ## Browse them
 
 **[rlawoals0529.github.io/agent-skills](https://rlawoals0529.github.io/agent-skills/)** -
-the same ten, indexed by the failure each one prevents, with the phrases that summon it
+the same eleven, indexed by the failure each one prevents, with the phrases that summon it
 
 The page is generated from these files: the names and descriptions from each `SKILL.md`, the
 failures from the table below, and the triggers from
@@ -33,6 +33,7 @@ that is no longer here.
 | [`code-quality`](skills/code-quality) | Running metrics over a diff instead of opening the files, and closing a review thread on an opinion rather than a proof |
 | [`bug-bash`](skills/bug-bash) | Re-running a finding through the same tool that produced it and calling that verification |
 | [`voice-capture`](skills/voice-capture) | An agent writing under your name in its own register, and posting it before you saw it |
+| [`open-source-contribution`](skills/open-source-contribution) | Chasing contribution count instead of shipping one verified, project-native change that follows the upstream repository's rules |
 
 ## Design notes
 
