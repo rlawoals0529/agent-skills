@@ -40,6 +40,7 @@ jobs:
           path: test-results/
           retention-days: 7
 
+  # yasbd head: 30af305f44a857a8f0c71d59e48b5383f72b1de1
   verify-yasbd-349:
     name: Verify yasbd #349 (Python ${{ matrix.python }})
     runs-on: ubuntu-latest
