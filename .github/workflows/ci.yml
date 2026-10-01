@@ -39,3 +39,33 @@ jobs:
           name: playwright-report
           path: test-results/
           retention-days: 7
+
+  verify-ecsodus:
+    name: Verify Ecsodus HTML report (Python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/ecsodus
+          ref: feat/html-report
+          path: ecsodus
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.10"
+          terraform_wrapper: false
+      - run: uv sync
+        working-directory: ecsodus
+      - run: uv run ruff check .
+        working-directory: ecsodus
+      - run: uv run ruff format --check .
+        working-directory: ecsodus
+      - run: uv run mypy src
+        working-directory: ecsodus
+      - run: uv run pytest -q
+        working-directory: ecsodus
