@@ -1,0 +1,64 @@
+name: Verify promptargs shell quoting
+
+on:
+  push:
+    branches:
+      - ci/verify-promptargs-fd9e286
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/promptargs
+          ref: fd9e2863310c6d172a1b4f7458aebfe68ab84ce8
+          path: promptargs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: promptargs/package-lock.json
+      - name: Install
+        working-directory: promptargs
+        run: npm ci --ignore-scripts
+      - name: Lint
+        working-directory: promptargs
+        run: npm run lint
+      - name: Build
+        working-directory: promptargs
+        run: npm run build
+      - name: Test
+        working-directory: promptargs
+        run: npm test
+
+  dist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/promptargs
+          ref: fd9e2863310c6d172a1b4f7458aebfe68ab84ce8
+          path: promptargs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: promptargs/package-lock.json
+      - name: Install
+        working-directory: promptargs
+        run: npm ci --ignore-scripts
+      - name: Build
+        working-directory: promptargs
+        run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: promptargs-dist
+          path: promptargs/dist
+          if-no-files-found: error
