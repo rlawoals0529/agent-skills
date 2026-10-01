@@ -40,6 +40,7 @@ jobs:
           path: test-results/
           retention-days: 7
 
+  # Ecsodus head: c5e01f3bae61d7031281193a6959d4c311d7eeb2
   verify-ecsodus:
     name: Verify Ecsodus HTML report (Python ${{ matrix.python }})
     runs-on: ubuntu-latest
