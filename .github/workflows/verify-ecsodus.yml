@@ -1,0 +1,44 @@
+name: Verify ecsodus HTML report
+
+on:
+  push:
+    branches:
+      - ci/verify-ecsodus-c11a1e6
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/ecsodus
+          ref: c11a1e6de05b1ee8c6c36d454643414fc267ff63
+          path: ecsodus
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.10"
+          terraform_wrapper: false
+      - name: Sync
+        working-directory: ecsodus
+        run: uv sync
+      - name: Ruff
+        working-directory: ecsodus
+        run: uv run ruff check .
+      - name: Format
+        working-directory: ecsodus
+        run: uv run ruff format --check .
+      - name: Mypy
+        working-directory: ecsodus
+        run: uv run mypy src
+      - name: Tests
+        working-directory: ecsodus
+        run: uv run pytest -q
