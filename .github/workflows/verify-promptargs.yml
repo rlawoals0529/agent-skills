@@ -6,7 +6,7 @@ on:
       - ci/verify-promptargs-fd9e286
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   test:
@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: rlawoals0529/promptargs
-          ref: b077e2eb3e8e4bfebb67475ae04a23fa03206a76
+          ref: 89045b09b2b6fd1783c7ca0a9789edee724d95de
           path: promptargs
       - uses: actions/setup-node@v4
         with:
@@ -34,71 +34,21 @@ jobs:
       - name: Build
         working-directory: promptargs
         run: npm run build
+      - name: Check committed dist
+        working-directory: promptargs
+        run: |
+          test -z "$(git status --porcelain -- dist/)" || {
+            git diff -- dist/
+            git status --short -- dist/
+            exit 1
+          }
       - name: Test
         working-directory: promptargs
         run: npm test
-
-  dist:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: rlawoals0529/promptargs
-          ref: b077e2eb3e8e4bfebb67475ae04a23fa03206a76
-          path: promptargs
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: promptargs/package-lock.json
-      - name: Install
-        working-directory: promptargs
-        run: npm ci --ignore-scripts
-      - name: Build
-        working-directory: promptargs
-        run: npm run build
-      - uses: actions/upload-artifact@v4
-        with:
-          name: promptargs-dist
-          path: promptargs/dist
-          if-no-files-found: error
-
-  publish-dist:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: rlawoals0529/promptargs
-          ref: b077e2eb3e8e4bfebb67475ae04a23fa03206a76
-          path: promptargs
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: promptargs/package-lock.json
-      - name: Build
+      - name: CLI smoke
         working-directory: promptargs
         run: |
-          npm ci --ignore-scripts
-          npm run build
-      - uses: actions/checkout@v4
-        with:
-          repository: rlawoals0529/agent-skills
-          ref: artifacts/promptargs-dist-b077
-          path: sink
-          token: ${{ github.token }}
-      - name: Publish generated files
-        run: |
-          mkdir -p sink/tmp/promptargs-dist
-          cp promptargs/dist/ui.html sink/tmp/promptargs-dist/ui.html
-          cp promptargs/dist/ui-builder.test.js sink/tmp/promptargs-dist/ui-builder.test.js
-          cp promptargs/dist/ui-builder.test.js.map sink/tmp/promptargs-dist/ui-builder.test.js.map
-          cd sink
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tmp/promptargs-dist
-          if git diff --cached --quiet; then
-            exit 0
-          fi
-          git commit -m "chore: export promptargs dist"
-          git push origin HEAD:artifacts/promptargs-dist-b077
+          node dist/cli.js help
+          node dist/cli.js env
+          node dist/cli.js "Hello {{name}}" --name=World --no-interactive
+          node dist/cli.js "Review {{file}} for {{focus}}" --file=a.go,b.go --focus=x,y --cross --no-interactive
