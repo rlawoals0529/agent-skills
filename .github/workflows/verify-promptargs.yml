@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: rlawoals0529/promptargs
-          ref: 89045b09b2b6fd1783c7ca0a9789edee724d95de
+          ref: ac8e0b916df6fa19a9fb3c8c24bee6b15fcece5d
           path: promptargs
       - uses: actions/setup-node@v4
         with:
