@@ -6,7 +6,7 @@ on:
       - ci/verify-promptargs-fd9e286
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   test:
@@ -62,3 +62,43 @@ jobs:
           name: promptargs-dist
           path: promptargs/dist
           if-no-files-found: error
+
+  publish-dist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/promptargs
+          ref: b077e2eb3e8e4bfebb67475ae04a23fa03206a76
+          path: promptargs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: promptargs/package-lock.json
+      - name: Build
+        working-directory: promptargs
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+      - uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/agent-skills
+          ref: artifacts/promptargs-dist-b077
+          path: sink
+          token: ${{ github.token }}
+      - name: Publish generated files
+        run: |
+          mkdir -p sink/tmp/promptargs-dist
+          cp promptargs/dist/ui.html sink/tmp/promptargs-dist/ui.html
+          cp promptargs/dist/ui-builder.test.js sink/tmp/promptargs-dist/ui-builder.test.js
+          cp promptargs/dist/ui-builder.test.js.map sink/tmp/promptargs-dist/ui-builder.test.js.map
+          cd sink
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tmp/promptargs-dist
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "chore: export promptargs dist"
+          git push origin HEAD:artifacts/promptargs-dist-b077
