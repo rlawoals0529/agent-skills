@@ -39,3 +39,20 @@ jobs:
           name: playwright-report
           path: test-results/
           retention-days: 7
+
+  verify-yasbd-349:
+    name: Verify yasbd #349 regression
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: rlawoals0529/yasbd-lib
+          ref: bugfix/349-reference-abbreviations
+          path: yasbd-lib
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv pip install -e ".[dev]" spacy langcodes py3langid
+        working-directory: yasbd-lib
+      - run: uv run pytest tests/test_boundary_detector.py -q
+        working-directory: yasbd-lib
