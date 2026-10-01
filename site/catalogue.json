@@ -76,6 +76,20 @@
     ]
   },
   {
+    "name": "open-source-contribution",
+    "dir": "open-source-contribution",
+    "failure": "Chasing contribution count instead of shipping one verified, project-native change that follows the upstream repository's rules",
+    "description": "Take a public GitHub issue from candidate check through a verified, project-native pull request. Routes through task-kickoff, code-quality, adversarial-review, review-triage, voice-capture, and audit-pr-threads at the stages where each belongs. Use when choosing an open-source issue, contributing to another repository, preparing or opening a PR, or handling feedback on an external contribution. Triggers on \"open source contribution\", \"contribute to this repo\", \"work this issue\", \"prepare this PR\", \"open this PR\", \"/open-source-contribution\".",
+    "triggers": [
+      "open source contribution",
+      "contribute to this repo",
+      "work this issue",
+      "prepare this pr",
+      "open this pr",
+      "/open-source-contribution"
+    ]
+  },
+  {
     "name": "review-triage",
     "dir": "review-triage",
     "failure": "Reading every line to find out which lines mattered, and missing rules implemented twice with nothing enforcing agreement",
