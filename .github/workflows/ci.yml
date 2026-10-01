@@ -41,8 +41,11 @@ jobs:
           retention-days: 7
 
   verify-yasbd-349:
-    name: Verify yasbd #349 regression
+    name: Verify yasbd #349 (Python ${{ matrix.python }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -51,9 +54,19 @@ jobs:
           path: yasbd-lib
       - uses: astral-sh/setup-uv@v6
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python }}
           activate-environment: true
       - run: uv pip install -e ".[dev]" spacy langcodes py3langid
         working-directory: yasbd-lib
-      - run: uv run pytest tests/test_boundary_detector.py -q
+      - run: uv run pytest -v --tb=short
+        working-directory: yasbd-lib
+      - if: matrix.python == '3.12'
+        run: |
+          uv run ruff format src/ --check
+          uv run ruff check src/
+        working-directory: yasbd-lib
+      - if: matrix.python == '3.12'
+        run: |
+          python3 scripts/reformat_sets.py
+          git diff --exit-code -- src/yasbd/rules
         working-directory: yasbd-lib
