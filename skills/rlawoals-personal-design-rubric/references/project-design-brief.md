@@ -3,8 +3,10 @@
 Copy this prompt into a new ChatGPT Chat or coding-agent task. Fill in the brackets.
 
 ```text
-Use my personal design rubric from:
+Use my personal design rubric from the agent-skills repository:
 https://github.com/rlawoals0529/agent-skills/tree/main/skills/rlawoals-personal-design-rubric
+If the skill is not merged yet, read the draft PR:
+https://github.com/rlawoals0529/agent-skills/pull/9/files
 
 Project: [name and purpose]
 Repo: [URL, if one exists]
