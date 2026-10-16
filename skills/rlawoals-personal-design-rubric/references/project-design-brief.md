@@ -5,8 +5,6 @@ Copy this prompt into a new ChatGPT Chat or coding-agent task. Fill in the brack
 ```text
 Use my personal design rubric from the agent-skills repository:
 https://github.com/rlawoals0529/agent-skills/tree/main/skills/rlawoals-personal-design-rubric
-If the skill is not merged yet, read the draft PR:
-https://github.com/rlawoals0529/agent-skills/pull/9/files
 
 Project: [name and purpose]
 Repo: [URL, if one exists]
@@ -19,8 +17,9 @@ Constraints: [stack, no paid tools, accessibility, privacy, branding]
 
 Treat this as product design first, not a generic AI dashboard. Review
 existing patterns and actual workflows before adding visual elements.
-Take inspiration from the usability of high-quality software such as
-Linear, but create original composition and distinctive product interactions.
+Use proven principles of high-quality software interfaces: clear
+hierarchy, compact navigation, good keyboard workflows, and purposeful
+data density. Create original compositions and product-specific interactions.
 
 First give two truly different information architectures and explain
 their tradeoffs. Then propose a recommended direction with:
