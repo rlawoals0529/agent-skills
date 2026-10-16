@@ -11,7 +11,7 @@ Use this to design and review thoughtful, original, useful software interfaces. 
 
 - The current project's audience, jobs-to-be-done, brand, accessibility requirements, and direct user feedback override this skill.
 - Default to a compact, low-noise, tool-first interface where the primary task is obvious. If a project needs a warmer or more playful direction, adapt instead of forcing dark navy.
-- Inspiration can inform interaction principles. Do not copy another product's layout, branding, icons, or proprietary assets pixel-for-pixel. In particular, Linear is a reference for density, hierarchy, navigation, and keyboard-first behavior, not a template to clone.
+- Inspiration can inform interaction principles. Favor strong hierarchy, compact navigation, efficient search, keyboard-first interactions, and consistent spacing. Do not copy another product's layout, branding, icons, or proprietary assets pixel-for-pixel.
 - Distinguish confirmed requirements from your design proposals. Ask for preference only when a decision materially changes direction; otherwise produce a concrete, reviewable proposal.
 
 ## Grounded preferences
@@ -21,7 +21,7 @@ Preferences explicitly established during Patchwise design exploration:
 - Favor dark, very deep midnight navy over flat charcoal, with cool blue / violet undertones.
 - Prefer muted slate-selected surfaces and comfortable tonal separation instead of glaring white or pale-frost cards.
 - Use a restrained navy-to-purple gradient for subtle depth, primarily in one header edge or ambient treatment; keep the content background solid.
-- Prioritize compact, Linear-like navigation and information density. Reduce excessive card padding, giant hero copy, redundant labels, and wasted whitespace.
+- Prioritize compact, purpose-built navigation and balanced information density. Reduce excessive card padding, giant hero copy, redundant labels, and wasted whitespace.
 - Keep product-specific character. Champion artwork and useful patch-change markers can supply visual interest without flashy effects.
 - Avoid newspaper-like layouts for tools, stock AI chat dashboards, loud glows, glassmorphism, and identical rounded cards across every page.
 
