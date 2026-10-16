@@ -102,7 +102,7 @@ jobs:
           {
             echo "### Skills were not linted"
             echo
-            echo "\`skill-lint\` could not be checked out, so the eleven skills in this"
+            echo "\`skill-lint\` could not be checked out, so the skills in this"
             echo "repository went unchecked by anything but the structural job above."
             echo
             echo "It needs no secret while that repository is public. While it is private,"
