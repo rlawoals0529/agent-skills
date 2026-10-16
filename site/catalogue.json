@@ -104,6 +104,20 @@
     ]
   },
   {
+    "name": "rlawoals-personal-design-rubric",
+    "dir": "rlawoals-personal-design-rubric",
+    "failure": "A beautiful mockup that looks like an AI template, misses the real user workflow, and drifts into inconsistent styling during implementation",
+    "description": "Personal UI design and review rubric for compact, original, functional applications. Use for new frontend design, visual polish, design-system planning, and screenshot review. Triggers on \"use my personal design rubric\", \"midnight navy muted slate\", \"remove AI slop\", \"review my UI design\", \"personal UI rubric\", \"/rlawoals-personal-design-rubric\".",
+    "triggers": [
+      "use my personal design rubric",
+      "midnight navy muted slate",
+      "remove ai slop",
+      "review my ui design",
+      "personal ui rubric",
+      "/rlawoals-personal-design-rubric"
+    ]
+  },
+  {
     "name": "task-kickoff",
     "dir": "task-kickoff",
     "failure": "Diving into edits before knowing the real base branch, then discovering the ticket's comments contradicted its title",
